@@ -1,0 +1,40 @@
+<head>
+    <title>Відправлені пропозиції</title>
+    <style>
+    a {
+        text-decoration: none;
+    }
+    </style>
+</head>
+
+
+<h1>📤 Мої відправлені пропозиції</h1>
+
+<a href="{% url 'offers_received' %}">📥 Отримані</a>
+
+<br>
+<br>
+<a href="{% url 'book_list' %}">Назад</a>
+
+{% if messages %}
+    {% for message in messages %}
+        <div style="background:#d4edda; padding:10px; margin:10px 0;">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+<hr>
+
+{% for offer in offers %}
+    <div style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
+        <p><b>Кому:</b> {{ offer.to_user.username }}</p>
+        <p><b>Статус:</b> {{ offer.status }}</p>
+
+        <p>Я пропоную: {{ offer.offered_book.title }}</p>
+        <p>Хочу отримати: {{ offer.requested_book.title }}</p>
+    </div>
+{% empty %}
+    <p>Немає відправлених пропозицій</p>
+{% endfor %}
+

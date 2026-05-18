@@ -1,0 +1,59 @@
+<head>
+    <title>Отримані пропозиції</title>
+    <style>
+    a {
+        text-decoration: none;
+    }
+    </style>
+</head>
+
+
+
+
+<h1>📥 Отримані пропозиції</h1>
+
+<a href="{% url 'offers_sent' %}">📤 Відправлені</a>
+<br>
+<br>
+<a href="{% url 'book_list' %}">Назад</a>
+<hr>
+
+{% if messages %}
+    {% for message in messages %}
+        <div style="
+            padding:10px;
+            margin:10px 0;
+            border:1px solid #ccc;
+            border-radius:5px;
+            {% if message.tags == 'success' %}
+                background: #80d467;
+            {% elif message.tags == 'info' %}
+                background: #c0392b;
+            {% else %}
+                background: #c4c4c4ff;
+            {% endif %}
+            color: white;
+        ">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endif %}
+
+
+
+{% for offer in offers %}
+    <div style="border:1px solid #ccc; padding:10px; margin-bottom:10px;">
+        <p><b>Від:</b> {{ offer.from_user.username }}</p>
+        <p><b>Статус:</b> {{ offer.status }}</p>
+
+        <p>Твоя книга: {{ offer.requested_book.title }}</p>
+        <p>Їхня книга: {{ offer.offered_book.title }}</p>
+
+        {% if offer.status == "pending" %}
+            <a href="{% url 'accept_offer' offer.id %}">✅ Прийняти</a>
+            <a href="{% url 'reject_offer' offer.id %}">❌ Відхилити</a>
+        {% endif %}
+    </div>
+{% empty %}
+    <p>Немає пропозицій</p>
+{% endfor %}

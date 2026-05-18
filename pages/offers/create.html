@@ -1,0 +1,28 @@
+<head>
+    <title>Запропонувати обмін</title>
+    <style>
+    a {
+        text-decoration: none;
+    }
+    </style>
+</head>
+
+
+
+
+<h1>🔄 Запропонувати обмін</h1>
+<br>
+<a href="{% url 'book_list' %}">Назад</a>
+
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Надіслати пропозицію</button>
+</form>
+
+
+
+
+

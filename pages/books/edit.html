@@ -1,0 +1,19 @@
+<head>
+    <title>Редагувати книгу</title>
+    <style>
+    a {
+        text-decoration: none;
+    }
+    </style>
+</head>
+
+<h1>✏️ Редагувати книгу</h1>
+
+<a href="{% url 'book_list' %}">Назад</a>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Зберегти зміни</button>
+</form>

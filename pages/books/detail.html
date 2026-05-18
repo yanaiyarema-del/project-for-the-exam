@@ -1,0 +1,38 @@
+<head>
+    <title>Книга - {{ book.title }}</title>
+    <style>
+    a {
+        text-decoration: none;
+    }
+    </style>
+</head>
+
+
+
+<h1>{{ book.title }}</h1>
+
+<a href="{% url 'book_list' %}">Назад до списку</a>
+
+<hr>
+
+{% if book.image %}
+    <img src="{{ book.image.url }}" width="300">
+{% else %}
+    <p>Немає фото</p>
+{% endif %}
+
+<h3>Автор: {{ book.author }}</h3>
+<p><b>Власник:</b> {{ book.owner.username }}</p>
+
+<hr>
+
+<h3>Опис</h3>
+<p>{{ book.description }}</p>
+
+<hr>
+
+{% if user.is_authenticated and book.owner != user %}
+    <a href="{% url 'create_offer' %}?requested={{ book.id }}">
+        🔄 Запропонувати обмін
+    </a>
+{% endif %}

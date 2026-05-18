@@ -1,0 +1,25 @@
+<head>
+    <title>Вхід</title>
+    <style>
+    a {
+        text-decoration: none;
+    }
+    </style>
+</head>
+
+
+
+<h1>Вхід</h1>
+
+<form method="post">
+    {% csrf_token %}
+    <input type="text" name="username" placeholder="Username">
+    <input type="password" name="password" placeholder="Password">
+    <button type="submit">Увійти</button>
+</form>
+
+<a href="{% url 'register' %}">Немає акаунту? Зареєструйтесь!</a>
+
+<br>
+
+<a href="{% url 'home' %}">На головну</a>
